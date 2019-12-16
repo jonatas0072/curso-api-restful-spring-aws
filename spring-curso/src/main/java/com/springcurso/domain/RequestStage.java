@@ -11,9 +11,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Request {
+public class RequestStage {
     private Long id;
-    private String subject;
+    private Date realizationDate;
     private String description;
-    private Date criationDate;
+    
 }
