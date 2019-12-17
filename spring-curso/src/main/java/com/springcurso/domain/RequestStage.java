@@ -1,6 +1,22 @@
 package com.springcurso.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.springcurso.domain.enums.RequestState;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +27,33 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestStage {
+@Entity
+@Table(name = "request_stage")
+public class RequestStage implements Serializable {
+
+    private static final long serialVersionUID = -7283598516608265794L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date realizationDate;
+
+    @Column(columnDefinition = "text")
     private String description;
-    
+
+    @Column(name = "realization_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date realizationDate;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RequestState state;
+
+    @ManyToOne
+    @JoinColumn(name = "request_id", nullable = false)
+    private Request request;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 }
