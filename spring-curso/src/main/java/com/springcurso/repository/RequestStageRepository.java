@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.springcurso.domain.Request;
 import com.springcurso.domain.RequestStage;
+import com.springcurso.domain.enums.RequestState;
 
 @Repository
 public interface RequestStageRepository
@@ -16,5 +17,5 @@ public interface RequestStageRepository
         public List<RequestStage> findAllByRequestId(Long Id);
         
         @Query("UPDATE Request SET state = ?2 WHERE id = ?1")
-        public Request updateStatus(Long id, RequestStage state);
+        public Request updateStatus(Long id, RequestState state);
 }
