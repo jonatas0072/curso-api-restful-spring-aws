@@ -16,6 +16,4 @@ public interface RequestStageRepository
 
         public List<RequestStage> findAllByRequestId(Long Id);
         
-        @Query("UPDATE Request SET state = ?2 WHERE id = ?1")
-        public Request updateStatus(Long id, RequestState state);
 }
