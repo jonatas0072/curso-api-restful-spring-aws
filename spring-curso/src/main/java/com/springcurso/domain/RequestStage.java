@@ -22,22 +22,7 @@ import com.springcurso.domain.enums.RequestState;
 @Table(name = "request_stage")
 public class RequestStage implements Serializable {
 
-    private static final long serialVersionUID = -7283598516608265794L;
-
-    public RequestStage() {
-        super();
-    }
-
-    public RequestStage(Long id, String description, Date realizationDate,
-            RequestState state, Request request, User user) {
-        super();
-        this.id = id;
-        this.description = description;
-        this.realizationDate = realizationDate;
-        this.state = state;
-        this.request = request;
-        this.user = user;
-    }
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,12 +40,22 @@ public class RequestStage implements Serializable {
     private RequestState state;
 
     @ManyToOne
-    @JoinColumn(name = "request_id", nullable = false)
+    @JoinColumn(name = "request_id", nullable = false, referencedColumnName = "id")
     private Request request;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
+    private Usuario user;
+
+    public RequestStage(Long id, String description, Date realizationDate,
+            RequestState state, Request request, Usuario user) {
+        this.id = id;
+        this.description = description;
+        this.realizationDate = realizationDate;
+        this.state = state;
+        this.request = request;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -102,11 +97,11 @@ public class RequestStage implements Serializable {
         this.request = request;
     }
 
-    public User getUser() {
+    public Usuario getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Usuario user) {
         this.user = user;
     }
 
