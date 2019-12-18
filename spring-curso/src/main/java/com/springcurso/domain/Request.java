@@ -21,20 +21,28 @@ import javax.persistence.TemporalType;
 
 import com.springcurso.domain.enums.RequestState;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "request")
 public class Request implements Serializable {
 
     private static final long serialVersionUID = 5039987690976397173L;
+
+    public Request() {
+        super();
+    }
+
+    public Request(Long id, String subject, String description,
+            Date criationDate, RequestState state, User user,
+            List<RequestStage> stages) {
+        super();
+        this.id = id;
+        this.subject = subject;
+        this.description = description;
+        this.criationDate = criationDate;
+        this.state = state;
+        this.user = user;
+        this.stages = stages;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +68,68 @@ public class Request implements Serializable {
 
     @OneToMany(mappedBy = "request")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCriationDate() {
+        return criationDate;
+    }
+
+    public void setCriationDate(Date criationDate) {
+        this.criationDate = criationDate;
+    }
+
+    public RequestState getState() {
+        return state;
+    }
+
+    public void setState(RequestState state) {
+        this.state = state;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<RequestStage> getStages() {
+        return stages;
+    }
+
+    public void setStages(List<RequestStage> stages) {
+        this.stages = stages;
+    }
+
+    @Override
+    public String toString() {
+        return "Request [id=" + id + ", subject=" + subject + ", description="
+                + description + ", criationDate=" + criationDate + ", state="
+                + state + ", user=" + user + ", stages=" + stages + "]";
+    }
 
 }
