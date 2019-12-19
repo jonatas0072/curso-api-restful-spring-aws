@@ -55,9 +55,14 @@ public class Request implements Serializable {
     public Request() {
     }
 
+    public Request(long id, RequestState state,Usuario user) {
+        this.id = id;
+        this.state = state;
+        this.user = user;
+    }
+
     public Request(String subject, String description, Date criationDate,
             RequestState state, Usuario user, List<RequestStage> stages) {
-        super();
         this.subject = subject;
         this.description = description;
         this.criationDate = criationDate;

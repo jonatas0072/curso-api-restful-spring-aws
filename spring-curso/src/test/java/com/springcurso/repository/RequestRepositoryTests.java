@@ -76,4 +76,13 @@ public class RequestRepositoryTests {
         assertThat(requests.get().getUser().getId()).isEqualTo(1);
     }
 
+    // public void fUpdateStatusTest() {
+    // Usuario usuario = new Usuario();
+    // usuario.setId(1L);
+    // Request request = new Request(1L, RequestState.CLOSED, usuario);
+    //
+    // Request updateRequest = requestRepository.save(request);
+    //
+    // assertThat(updateRequest.getState()).isEqualTo(RequestState.CLOSED);
+    // }
 }
