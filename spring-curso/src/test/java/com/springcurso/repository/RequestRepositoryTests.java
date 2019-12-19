@@ -47,7 +47,7 @@ public class RequestRepositoryTests {
 
         Request request = new Request(1L, "MacBook pro 13",
                 "Descrição: MacBook Pro 13 the Jonatas Idtrustian", null,
-                RequestState.IN_PROGRESS, usuario, null);
+                RequestState.OPEN, usuario, null);
 
         Request updateRequest = requestRepository.save(request);
 
@@ -79,7 +79,7 @@ public class RequestRepositoryTests {
     // public void fUpdateStatusTest() {
     // Usuario usuario = new Usuario();
     // usuario.setId(1L);
-    // Request request = new Request(1L, RequestState.CLOSED, usuario);
+    // Request request = new Request(1L, RequestState.IN_PROGRESS, usuario);
     //
     // Request updateRequest = requestRepository.save(request);
     //

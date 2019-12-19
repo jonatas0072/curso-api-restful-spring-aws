@@ -31,7 +31,7 @@ public class RequestStage implements Serializable {
     @Column(columnDefinition = "text")
     private String description;
 
-    @Column(name = "realization_date", nullable = false)
+    @Column(name = "realization_date", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date realizationDate;
 
@@ -47,9 +47,23 @@ public class RequestStage implements Serializable {
     @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
     private Usuario user;
 
+    public RequestStage() {
+
+    }
+
     public RequestStage(Long id, String description, Date realizationDate,
             RequestState state, Request request, Usuario user) {
         this.id = id;
+        this.description = description;
+        this.realizationDate = realizationDate;
+        this.state = state;
+        this.request = request;
+        this.user = user;
+    }
+
+    public RequestStage(String description, Date realizationDate,
+            RequestState state, Request request, Usuario user) {
+        super();
         this.description = description;
         this.realizationDate = realizationDate;
         this.state = state;
