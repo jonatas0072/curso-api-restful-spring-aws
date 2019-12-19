@@ -12,8 +12,12 @@ import com.springcurso.domain.enums.RequestState;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    List<Request> findAllById(Long id);
+  //  List<Request> findAllById(Long id);
     
-    @Query("UPDATE Request SET state = ?2 WHERE id = ?1")
+    @Query(value = "UPDATE Request SET state = ?2 WHERE id = ?1", nativeQuery =  true)
     Request updateStatus(Long id, RequestState state);
+
+    //List<Request> findAllByUsuarioId(long id);
+
+    
 }

@@ -37,7 +37,7 @@ public class Request implements Serializable {
     @Column(columnDefinition = "text")
     private String description;
 
-    @Column(name = "criation_date", nullable = false)
+    @Column(name = "criation_date", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date criationDate;
 
@@ -51,6 +51,20 @@ public class Request implements Serializable {
 
     @OneToMany(mappedBy = "request")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
+
+    public Request() {
+    }
+
+    public Request(String subject, String description, Date criationDate,
+            RequestState state, Usuario user, List<RequestStage> stages) {
+        super();
+        this.subject = subject;
+        this.description = description;
+        this.criationDate = criationDate;
+        this.state = state;
+        this.user = user;
+        this.stages = stages;
+    }
 
     public Request(Long id, String subject, String description,
             Date criationDate, RequestState state, Usuario user,
@@ -70,6 +84,14 @@ public class Request implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
 
     public String getSubject() {
