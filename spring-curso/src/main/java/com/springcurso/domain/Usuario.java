@@ -45,8 +45,21 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
 
-    public Usuario(Long id, String name, String email, String password,
-            Role role, List<Request> requests, List<RequestStage> stages) {
+    public Usuario() {
+    }
+
+    public Usuario(String name, String email, String password, Role role,
+            List<Request> requests, List<RequestStage> stages) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.requests = requests;
+        this.stages = stages;
+    }
+    
+    public Usuario(Long id,String name, String email, String password, Role role,
+            List<Request> requests, List<RequestStage> stages) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,6 +68,7 @@ public class Usuario implements Serializable {
         this.requests = requests;
         this.stages = stages;
     }
+
 
     public Long getId() {
         return id;
@@ -110,6 +124,13 @@ public class Usuario implements Serializable {
 
     public void setStages(List<RequestStage> stages) {
         this.stages = stages;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", name=" + name + ", email=" + email
+                + ", password=" + password + ", role=" + role + ", requests="
+                + requests + ", stages=" + stages + "]";
     }
 
 }
