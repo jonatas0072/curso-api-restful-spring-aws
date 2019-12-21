@@ -3,7 +3,6 @@ package com.springcurso.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.FixMethodOrder;
@@ -51,9 +50,9 @@ public class ResquestStageRepositoryTests {
         assertThat(stage.getDescription()).isEqualTo("Foi comprado um macbook de 125gb sdd");
     }
 
-    @Test
-    public void listByRequestIdTest() {
-        List<RequestStage> stages = requestStageRepository.findAll();
-        assertThat(stages.size()).isEqualTo(1);
-    }
+    // @Test
+    // public void listByRequestIdTest() {
+    // List<RequestStage> stages = requestStageRepository.findAllRequestId(1L);
+    // assertThat(stages.size()).isEqualTo(1);
+    // }
 }
