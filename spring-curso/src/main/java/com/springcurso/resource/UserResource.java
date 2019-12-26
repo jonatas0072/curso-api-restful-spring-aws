@@ -55,7 +55,7 @@ public class UserResource {
         return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("{id}/requests")
+    @GetMapping("/{id}/requests")
     public ResponseEntity<List<Request>> listAllRequestById(
             @PathVariable(name = "id") Long id) {
         List<Request> requests = requestService.listAllByOwnerId(id);
