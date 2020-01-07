@@ -43,9 +43,9 @@ public class RequestService {
         return requests;
     }
 
-    public List<Request> listAllByOwnerId(Long usuarioId) {
+    public List<Request> listAllByOwnerId(Long id) {
         List<Request> requests = requestRepository
-                .findAllByUsuarioId(usuarioId);
+                .findAllByUserId(id);
         return requests;
 
     }
