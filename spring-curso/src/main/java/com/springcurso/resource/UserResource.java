@@ -29,7 +29,7 @@ public class UserResource {
     @Autowired
     private RequestService requestService;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
         Usuario creadedUsuario = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(creadedUsuario);
