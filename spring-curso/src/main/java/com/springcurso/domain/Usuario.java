@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springcurso.domain.enums.Role;
 
 @Entity
@@ -57,9 +59,9 @@ public class Usuario implements Serializable {
         this.requests = requests;
         this.stages = stages;
     }
-    
-    public Usuario(Long id,String name, String email, String password, Role role,
-            List<Request> requests, List<RequestStage> stages) {
+
+    public Usuario(Long id, String name, String email, String password,
+            Role role, List<Request> requests, List<RequestStage> stages) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -68,7 +70,6 @@ public class Usuario implements Serializable {
         this.requests = requests;
         this.stages = stages;
     }
-
 
     public Long getId() {
         return id;
@@ -94,10 +95,12 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -110,6 +113,7 @@ public class Usuario implements Serializable {
         this.role = role;
     }
 
+    @JsonIgnore
     public List<Request> getRequests() {
         return requests;
     }
@@ -118,6 +122,7 @@ public class Usuario implements Serializable {
         this.requests = requests;
     }
 
+    @JsonIgnore
     public List<RequestStage> getStages() {
         return stages;
     }
