@@ -26,7 +26,7 @@ public class RequestResource {
     private RequestService requestService;
 
     @Autowired
-    private RequestStageService stageService;
+    private RequestStageService requestStageService;
 
     @PostMapping
     public ResponseEntity<Request> save(@RequestBody Request request) {
@@ -57,7 +57,7 @@ public class RequestResource {
     @GetMapping("/{id}/request-stages")
     public ResponseEntity<List<RequestStage>> listtAllStageById(
             @PathVariable(name = "id") Long id) {
-        List<RequestStage> stages = stageService.listAllByRequestId(id);
+        List<RequestStage> stages = requestStageService.listAllByRequestId(id);
         return ResponseEntity.ok(stages);
     }
 
