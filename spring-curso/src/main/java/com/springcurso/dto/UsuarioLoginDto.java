@@ -1,7 +1,16 @@
 package com.springcurso.dto;
 
+import javax.validation.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UsuarioLoginDto {
+    
+    @JsonProperty("email")
+    @Email
     private String email;
+    
+    @JsonProperty("password")
     private String password;
 
     public String getEmail() {
