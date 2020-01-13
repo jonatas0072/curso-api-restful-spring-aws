@@ -1,6 +1,7 @@
 package com.springcurso.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class UserRepositoryTests {
 
         Optional<Usuario> findById = userRepository
                 .findById(result.get().getId());
-
-        assertThat(result.get().getId()).isEqualTo(findById.get().getId());
+        assertEquals(result.get().getId(), findById.get().getId());
     }
+    
 }
