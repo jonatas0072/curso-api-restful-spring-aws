@@ -46,9 +46,14 @@ public class UsuarioService {
 
     // login
     public Usuario login(String email, String password) {
-        password = HashUtil.getSecureHash(password);
+        String password_hash = HashUtil.getSecureHash(password);
 
-        Optional<Usuario> result = userRepository.login(email, password);
+        Optional<Usuario> result = userRepository.login(email, password_hash);
+        if (result.isPresent())
+            System.out.println("Usuario Encontrado");
+        else
+            System.out.println("Usuario Nao Encontrado");
         return result.get();
+
     }
 }
