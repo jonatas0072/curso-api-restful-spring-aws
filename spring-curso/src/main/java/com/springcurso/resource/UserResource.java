@@ -67,7 +67,7 @@ public class UserResource {
     public ResponseEntity<Usuario> login(
             @RequestBody UsuarioLoginDto usuarioLogin) {
         Usuario loggedUsuario = usuarioService.login(usuarioLogin.getEmail(),
-                usuarioLogin.getEmail());
+                usuarioLogin.getPassword());
         return ResponseEntity.ok(loggedUsuario);
 
     }
