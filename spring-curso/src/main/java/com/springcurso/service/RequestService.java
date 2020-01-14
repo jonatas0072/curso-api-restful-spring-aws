@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.springcurso.domain.Request;
 import com.springcurso.domain.enums.RequestState;
+import com.springcurso.exception.NotFoundException;
 import com.springcurso.repository.RequestRepository;
 
 @Service
@@ -35,7 +36,8 @@ public class RequestService {
 
     public Request findById(Long id) {
         Optional<Request> result = requestRepository.findById(id);
-        return result.get();
+        return result.orElseThrow(() -> new NotFoundException(
+                "Não a request com este ID = " + id));
     }
 
     public List<Request> listAll() {
@@ -44,12 +46,9 @@ public class RequestService {
     }
 
     public List<Request> listAllByOwnerId(Long id) {
-        List<Request> requests = requestRepository
-                .findAllByUserId(id);
+        List<Request> requests = requestRepository.findAllByUserId(id);
         return requests;
 
     }
-    // list by owner id
-    // update status
 
 }
