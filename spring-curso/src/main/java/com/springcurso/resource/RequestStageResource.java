@@ -14,7 +14,7 @@ import com.springcurso.domain.RequestStage;
 import com.springcurso.service.RequestStageService;
 
 @RestController
-@RequestMapping(value = "request-stagers")
+@RequestMapping(value = "request-stages")
 public class RequestStageResource {
 
     @Autowired
