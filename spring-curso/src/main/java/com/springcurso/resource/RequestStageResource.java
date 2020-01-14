@@ -29,7 +29,7 @@ public class RequestStageResource {
                 .body(createdRequestStage);
     }
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public ResponseEntity<RequestStage> getById(
             @PathVariable(name = "id") Long id) {
         RequestStage stage = requestStageService.findById(id);
