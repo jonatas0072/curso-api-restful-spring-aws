@@ -5,11 +5,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.springcurso.domain.Request;
 import com.springcurso.domain.enums.RequestState;
 import com.springcurso.exception.NotFoundException;
+import com.springcurso.model.PageModel;
+import com.springcurso.model.PageRequestModel;
 import com.springcurso.repository.RequestRepository;
 
 @Service
@@ -51,4 +56,26 @@ public class RequestService {
 
     }
 
+    public PageModel<Request> listAllByOwnerIdOnLazy(Long usuarioId,
+            PageRequestModel prm) {
+        Pageable pageable = PageRequest.of(prm.getPage(), prm.getSize());
+        Page<Request> page = requestRepository.findAllByUserId(usuarioId,
+                pageable);
+
+        PageModel<Request> pm = new PageModel<Request>(
+                (int) page.getTotalElements(), page.getSize(),
+                page.getTotalPages(), page.getContent());
+        return pm;
+    }
+
+    public PageModel<Request> listAllOnLazyMode(PageRequestModel prm) {
+        Pageable pageable = PageRequest.of(prm.getPage(), prm.getSize());
+        Page<Request> page = requestRepository.findAll(pageable);
+
+        PageModel<Request> pm = new PageModel<Request>(
+                (int) page.getTotalElements(), page.getSize(),
+                page.getTotalPages(), page.getContent());
+
+        return pm;
+    }
 }
