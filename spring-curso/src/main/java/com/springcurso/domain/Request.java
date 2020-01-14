@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.ForeignKey;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springcurso.domain.enums.RequestState;
 
 @Entity
@@ -47,16 +49,16 @@ public class Request implements Serializable {
     private RequestState state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_id") )
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_id"))
     private Usuario user;
 
-    @OneToMany(mappedBy = "request")
+    @OneToMany(mappedBy = "request", fetch = FetchType.EAGER)
     private List<RequestStage> stages = new ArrayList<RequestStage>();
 
     public Request() {
     }
 
-    public Request(long id, RequestState state,Usuario user) {
+    public Request(long id, RequestState state, Usuario user) {
         this.id = id;
         this.state = state;
         this.user = user;
@@ -132,6 +134,7 @@ public class Request implements Serializable {
         this.state = state;
     }
 
+    @JsonIgnore
     public List<RequestStage> getStages() {
         return stages;
     }
