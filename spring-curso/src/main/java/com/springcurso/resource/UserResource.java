@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springcurso.domain.Request;
 import com.springcurso.domain.Usuario;
 import com.springcurso.dto.UsuarioLoginDto;
+import com.springcurso.model.PageModel;
+import com.springcurso.model.PageRequestModel;
 import com.springcurso.service.RequestService;
 import com.springcurso.service.UsuarioService;
 
@@ -50,9 +53,14 @@ public class UserResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listAll() {
-        List<Usuario> usuarios = usuarioService.listAll();
-        return ResponseEntity.ok(usuarios);
+    public ResponseEntity<PageModel<Usuario>> listAll(
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") int size) {
+
+        PageRequestModel prm = new PageRequestModel(page, size);
+        PageModel<Usuario> pm = usuarioService.listAllOnLazyMode(prm);
+
+        return ResponseEntity.ok(pm);
     }
 
     @GetMapping("/{id}/requests")
