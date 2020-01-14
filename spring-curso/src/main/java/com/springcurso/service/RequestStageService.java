@@ -25,10 +25,11 @@ public class RequestStageService {
         stage.setRealizationDate(new Date());
 
         RequestStage createdStage = requestStageRepository.save(stage);
-        Long requestId = stage.getRequest().getId();
         RequestState state = stage.getState();
 
-        requestRepository.updateStatus(requestId, state);
+        createdStage.setState(state);
+        requestRepository.save(createdStage.getRequest());
+        requestStageRepository.save(createdStage);
         return createdStage;
     }
 
