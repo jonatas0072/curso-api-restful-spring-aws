@@ -51,9 +51,11 @@ public class UsuarioService {
     public PageModel<Usuario> listAllOnLazyMode(PageRequestModel prm) {
         Pageable pageable = PageRequest.of(prm.getPage(), prm.getSize());
         Page<Usuario> page = userRepository.findAll(pageable);
-        
-        PageModel<Usuario> pm = new PageModel<Usuario>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
-        
+
+        PageModel<Usuario> pm = new PageModel<Usuario>(
+                (int) page.getTotalElements(), page.getSize(),
+                page.getTotalPages(), page.getContent());
+
         return pm;
     }
 
