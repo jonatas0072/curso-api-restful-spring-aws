@@ -1,0 +1,5 @@
+com/springcurso/SpringCursoApplicationTests.class
+com/springcurso/service/util/HashUtilTests.class
+com/springcurso/repository/UserRepositoryTests.class
+com/springcurso/repository/RequestRepositoryTests.class
+com/springcurso/repository/ResquestStageRepositoryTests.class
