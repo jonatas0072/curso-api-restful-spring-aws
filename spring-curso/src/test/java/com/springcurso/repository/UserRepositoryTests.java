@@ -1,12 +1,11 @@
 package com.springcurso.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +18,7 @@ import com.springcurso.domain.Request;
 import com.springcurso.domain.RequestStage;
 import com.springcurso.domain.Usuario;
 import com.springcurso.domain.enums.Role;
+import com.springcurso.service.UsuarioService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
@@ -28,13 +28,16 @@ public class UserRepositoryTests {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UsuarioService service;
+
     @Test
     public void aSaveTest() {
         Usuario user = new Usuario(1L, "Jonatas",
-                "jonatas.macedo@idtrust.com.br", "123", Role.ADMINISTRATOR,
+                "jonatas.macedo@idtrust.com.br", "123", Role.SIMPLE,
                 new ArrayList<Request>(), new ArrayList<RequestStage>());
 
-        Usuario createdUser = userRepository.save(user);
+        Usuario createdUser = service.save(user);
 
         Usuario findById = userRepository.findById(createdUser.getId()).get();
 
@@ -44,19 +47,18 @@ public class UserRepositoryTests {
     @Test
     public void bUpdateTest() {
         Usuario user = new Usuario(1L, "Jonatas Macedo",
-                "jonatas.macedo@idtrust.com.br", "3245678", Role.ADMINISTRATOR,
+                "jonatas.macedo@idtrust.com.br", "222", Role.ADMINISTRATOR,
                 new ArrayList<Request>(), new ArrayList<RequestStage>());
-        Usuario updatedUser = userRepository.saveAndFlush(user);
+        Usuario updatedUser = service.update(user);
 
         assertThat(updatedUser.getName()).isEqualTo("Jonatas Macedo");
     }
 
     @Test
     public void cFindByIdTest() {
-        Optional<Usuario> result = userRepository.findById(1L);
-        Usuario user = result.get();
+        Usuario result = service.findById(1L);
 
-        assertThat(user.getPassword()).isEqualTo("3245678");
+        Assert.assertEquals("Jonatas Macedo", result.getName());
 
     }
 
@@ -69,12 +71,10 @@ public class UserRepositoryTests {
 
     @Test
     public void eLoginTest() {
-        Optional<Usuario> result = userRepository
-                .login("jonatas.macedo@idtrust.com.br", "3245678");
-
-        Optional<Usuario> findById = userRepository
-                .findById(result.get().getId());
-        assertEquals(result.get().getId(), findById.get().getId());
+            Usuario result = service.login("jonatas.macedo@idtrust.com.br", "222");
+            Usuario loggedUser = result;
+            
+            assertThat(loggedUser.getId()).isEqualTo(1L);
     }
-    
+
 }

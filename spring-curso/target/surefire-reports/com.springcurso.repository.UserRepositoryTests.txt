@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: com.springcurso.repository.UserRepositoryTests
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.873 s <<< FAILURE! - in com.springcurso.repository.UserRepositoryTests
+dListTest  Time elapsed: 0.258 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+Expecting:
+ <8>
+to be equal to:
+ <1>
+but was not.
+	at com.springcurso.repository.UserRepositoryTests.dListTest(UserRepositoryTests.java:67)
+
+eLoginTest  Time elapsed: 0.128 s  <<< ERROR!
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.springcurso.repository.UserRepositoryTests.eLoginTest(UserRepositoryTests.java:73)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.springcurso.repository.UserRepositoryTests.eLoginTest(UserRepositoryTests.java:73)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: syntax error at or near "$1"
+  Position: 44
+	at com.springcurso.repository.UserRepositoryTests.eLoginTest(UserRepositoryTests.java:73)
+

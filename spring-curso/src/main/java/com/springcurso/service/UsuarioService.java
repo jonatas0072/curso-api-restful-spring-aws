@@ -23,9 +23,12 @@ public class UsuarioService {
     private UserRepository userRepository;
 
     public Usuario save(Usuario usuario) {
+        
         String hash = HashUtil.getSecureHash(usuario.getPassword());
         usuario.setPassword(hash);
+        
         Usuario createdUsuario = userRepository.save(usuario);
+        
         return createdUsuario;
     }
 
