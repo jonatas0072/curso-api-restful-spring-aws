@@ -44,16 +44,13 @@ public class PageModel<T> implements Serializable {
     }
 
     public PageModel() {
-
     }
 
-    public PageModel(int totalElements, int pageSeize, int totalPages,
-            List<T> elements) {
+    public PageModel(int totalElements, int pageSeize, int totalPages, List<T> elements) {
         super();
         this.totalElements = totalElements;
         this.pageSeize = pageSeize;
         this.totalPages = totalPages;
         this.elements = elements;
     }
-
 }

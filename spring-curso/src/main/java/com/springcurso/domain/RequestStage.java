@@ -1,22 +1,10 @@
 package com.springcurso.domain;
 
+import com.springcurso.domain.enums.RequestState;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.springcurso.domain.enums.RequestState;
 
 @Entity
 @Table(name = "request_stage")
@@ -48,11 +36,15 @@ public class RequestStage implements Serializable {
     private Usuario user;
 
     public RequestStage() {
-
     }
 
-    public RequestStage(Long id, String description, Date realizationDate,
-            RequestState state, Request request, Usuario user) {
+    public RequestStage(
+            Long id,
+            String description,
+            Date realizationDate,
+            RequestState state,
+            Request request,
+            Usuario user) {
         this.id = id;
         this.description = description;
         this.realizationDate = realizationDate;
@@ -61,8 +53,8 @@ public class RequestStage implements Serializable {
         this.user = user;
     }
 
-    public RequestStage(String description, Date realizationDate,
-            RequestState state, Request request, Usuario user) {
+    public RequestStage(
+            String description, Date realizationDate, RequestState state, Request request, Usuario user) {
         super();
         this.description = description;
         this.realizationDate = realizationDate;
@@ -121,8 +113,18 @@ public class RequestStage implements Serializable {
 
     @Override
     public String toString() {
-        return "RequestStage [id=" + id + ", description=" + description
-                + ", realizationDate=" + realizationDate + ", state=" + state
-                + ", request=" + request + ", user=" + user + "]";
+        return "RequestStage [id="
+                + id
+                + ", description="
+                + description
+                + ", realizationDate="
+                + realizationDate
+                + ", state="
+                + state
+                + ", request="
+                + request
+                + ", user="
+                + user
+                + "]";
     }
 }
