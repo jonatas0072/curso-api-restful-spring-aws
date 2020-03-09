@@ -55,7 +55,6 @@ public class RequestStage implements Serializable {
 
     public RequestStage(
             String description, Date realizationDate, RequestState state, Request request, Usuario user) {
-        super();
         this.description = description;
         this.realizationDate = realizationDate;
         this.state = state;
