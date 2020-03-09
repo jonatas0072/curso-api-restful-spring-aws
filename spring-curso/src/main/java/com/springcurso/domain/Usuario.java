@@ -1,23 +1,13 @@
 package com.springcurso.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springcurso.domain.enums.Role;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -51,8 +41,13 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String name, String email, String password, Role role,
-            List<Request> requests, List<RequestStage> stages) {
+    public Usuario(
+            String name,
+            String email,
+            String password,
+            Role role,
+            List<Request> requests,
+            List<RequestStage> stages) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -61,8 +56,14 @@ public class Usuario implements Serializable {
         this.stages = stages;
     }
 
-    public Usuario(Long id, String name, String email, String password,
-            Role role, List<Request> requests, List<RequestStage> stages) {
+    public Usuario(
+            Long id,
+            String name,
+            String email,
+            String password,
+            Role role,
+            List<Request> requests,
+            List<RequestStage> stages) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -134,9 +135,20 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", name=" + name + ", email=" + email
-                + ", password=" + password + ", role=" + role + ", requests="
-                + requests + ", stages=" + stages + "]";
+        return "Usuario [id="
+                + id
+                + ", name="
+                + name
+                + ", email="
+                + email
+                + ", password="
+                + password
+                + ", role="
+                + role
+                + ", requests="
+                + requests
+                + ", stages="
+                + stages
+                + "]";
     }
-
 }

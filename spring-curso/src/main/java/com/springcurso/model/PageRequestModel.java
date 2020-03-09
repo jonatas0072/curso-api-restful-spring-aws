@@ -29,5 +29,4 @@ public class PageRequestModel {
         this.page = page;
         this.size = size;
     }
-
 }

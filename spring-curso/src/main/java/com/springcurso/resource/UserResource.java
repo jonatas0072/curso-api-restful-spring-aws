@@ -1,17 +1,5 @@
 package com.springcurso.resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.springcurso.domain.Request;
 import com.springcurso.domain.Usuario;
 import com.springcurso.dto.UsuarioLoginDto;
@@ -19,6 +7,12 @@ import com.springcurso.model.PageModel;
 import com.springcurso.model.PageRequestModel;
 import com.springcurso.service.RequestService;
 import com.springcurso.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "users")
@@ -37,8 +31,8 @@ public class UserResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable(name = "id") Long id,
-            @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> update(
+            @PathVariable(name = "id") Long id, @RequestBody Usuario usuario) {
         usuario.setId(id);
         Usuario updateUsuario = usuarioService.update(usuario);
         return ResponseEntity.ok(updateUsuario);
@@ -73,12 +67,9 @@ public class UserResource {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(
-            @RequestBody UsuarioLoginDto usuarioLogin) {
-        Usuario loggedUsuario = usuarioService.login(usuarioLogin.getEmail(),
-                usuarioLogin.getPassword());
+    public ResponseEntity<Usuario> login(@RequestBody @Valid UsuarioLoginDto usuarioLogin) {
+        Usuario loggedUsuario =
+                usuarioService.login(usuarioLogin.getEmail(), usuarioLogin.getPassword());
         return ResponseEntity.ok(loggedUsuario);
-
     }
-
 }

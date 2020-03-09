@@ -1,28 +1,13 @@
 package com.springcurso.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springcurso.domain.enums.RequestState;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.ForeignKey;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springcurso.domain.enums.RequestState;
 
 @Entity
 @Table(name = "request")
@@ -49,7 +34,11 @@ public class Request implements Serializable {
     private RequestState state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_id"))
+    @JoinColumn(
+            name = "user_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_user_id"))
     private Usuario user;
 
     @OneToMany(mappedBy = "request", fetch = FetchType.EAGER)
@@ -64,8 +53,13 @@ public class Request implements Serializable {
         this.user = user;
     }
 
-    public Request(String subject, String description, Date criationDate,
-            RequestState state, Usuario user, List<RequestStage> stages) {
+    public Request(
+            String subject,
+            String description,
+            Date criationDate,
+            RequestState state,
+            Usuario user,
+            List<RequestStage> stages) {
         this.subject = subject;
         this.description = description;
         this.criationDate = criationDate;
@@ -74,8 +68,13 @@ public class Request implements Serializable {
         this.stages = stages;
     }
 
-    public Request(Long id, String subject, String description,
-            Date criationDate, RequestState state, Usuario user,
+    public Request(
+            Long id,
+            String subject,
+            String description,
+            Date criationDate,
+            RequestState state,
+            Usuario user,
             List<RequestStage> stages) {
         this.id = id;
         this.subject = subject;
@@ -145,9 +144,20 @@ public class Request implements Serializable {
 
     @Override
     public String toString() {
-        return "Request [id=" + id + ", subject=" + subject + ", description="
-                + description + ", criationDate=" + criationDate + ", state="
-                + state + ", user=" + user + ", stages=" + stages + "]";
+        return "Request [id="
+                + id
+                + ", subject="
+                + subject
+                + ", description="
+                + description
+                + ", criationDate="
+                + criationDate
+                + ", state="
+                + state
+                + ", user="
+                + user
+                + ", stages="
+                + stages
+                + "]";
     }
-
 }

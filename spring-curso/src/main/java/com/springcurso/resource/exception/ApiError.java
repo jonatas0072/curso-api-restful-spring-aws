@@ -36,7 +36,9 @@ public class ApiError implements Serializable {
     }
 
     public ApiError() {
-    };
+    }
+
+    ;
 
     public ApiError(int code, String msg, Date date) {
         super();
@@ -47,8 +49,6 @@ public class ApiError implements Serializable {
 
     @Override
     public String toString() {
-        return "ApiError [code=" + code + ", msg=" + msg + ", date=" + date
-                + "]";
+        return "ApiError [code=" + code + ", msg=" + msg + ", date=" + date + "]";
     }
-
 }

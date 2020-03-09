@@ -1,48 +1,43 @@
 package com.springcurso.dto;
 
-import javax.validation.constraints.Email;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class UsuarioLoginDto {
-    
-    @JsonProperty("email")
-    @Email
-    private String email;
-    
-    @JsonProperty("password")
-    private String password;
 
-    public String getEmail() {
-        return email;
-    }
+  @JsonProperty("email")
+  @Email(message = "Invalid email address")
+  private String email;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  @JsonProperty("password")
+  @NotBlank(message = "Invalid password, not blank")
+  private String password;
 
-    public String getPassword() {
-        return password;
-    }
+  public UsuarioLoginDto(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public UsuarioLoginDto(String email, String password) {
-        super();
-        this.email = email;
-        this.password = password;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public UsuarioLoginDto() {
-        super();
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    @Override
-    public String toString() {
-        return "UsuarioLoginDto [email=" + email + ", password=" + password
-                + "]";
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
+  @Override
+  public String toString() {
+    return "UsuarioLoginDto [email=" + email + ", password=" + password + "]";
+  }
 }
