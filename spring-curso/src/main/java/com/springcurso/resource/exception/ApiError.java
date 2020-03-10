@@ -5,50 +5,50 @@ import java.util.Date;
 
 public class ApiError implements Serializable {
 
-    private static final long serialVersionUID = -6689800709152064117L;
+  private static final long serialVersionUID = -6689800709152064117L;
 
-    private int code;
-    private String msg;
-    private Date date;
+  private int code;
+  private String msg;
+  private Date date;
 
-    public int getCode() {
-        return code;
-    }
+  public ApiError() {
+  }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
+  public ApiError(int code, String msg, Date date) {
+    super();
+    this.code = code;
+    this.msg = msg;
+    this.date = date;
+  }
 
-    public String getMsg() {
-        return msg;
-    }
+  public int getCode() {
+    return code;
+  }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
+  public void setCode(int code) {
+    this.code = code;
+  }
 
-    public Date getDate() {
-        return date;
-    }
+  public String getMsg() {
+    return msg;
+  }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
 
-    public ApiError() {
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    ;
+  ;
 
-    public ApiError(int code, String msg, Date date) {
-        super();
-        this.code = code;
-        this.msg = msg;
-        this.date = date;
-    }
+  public void setDate(Date date) {
+    this.date = date;
+  }
 
-    @Override
-    public String toString() {
-        return "ApiError [code=" + code + ", msg=" + msg + ", date=" + date + "]";
-    }
+  @Override
+  public String toString() {
+    return "ApiError [code=" + code + ", msg=" + msg + ", date=" + date + "]";
+  }
 }
