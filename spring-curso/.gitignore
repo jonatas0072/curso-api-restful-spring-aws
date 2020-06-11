@@ -2,4 +2,5 @@
 /.project
 *.idea/
 *.class
-spring-curso.iml
+*.iml
+target/
