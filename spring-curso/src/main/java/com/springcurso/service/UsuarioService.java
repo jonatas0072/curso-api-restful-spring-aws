@@ -1,33 +1,32 @@
 package com.springcurso.service;
 
 import com.springcurso.domain.Usuario;
-import com.springcurso.domain.enums.Role;
 import com.springcurso.exception.NotFoundException;
 import com.springcurso.model.PageModel;
 import com.springcurso.model.PageRequestModel;
 import com.springcurso.repository.UserRepository;
 import com.springcurso.service.util.HashUtil;
+import java.util.List;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class UsuarioService {
 
-  @Autowired
-  private UserRepository userRepository;
+  @Autowired private UserRepository userRepository;
+
+  private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 
   public Usuario save(Usuario usuario) {
 
     String hash = HashUtil.getSecureHash(usuario.getPassword());
     usuario.setPassword(hash);
-
-    usuario.setRole(Role.SIMPLE);
 
     Usuario createdUsuario = userRepository.save(usuario);
 
@@ -57,8 +56,8 @@ public class UsuarioService {
     Page<Usuario> page = userRepository.findAll(pageable);
 
     PageModel<Usuario> pm =
-            new PageModel<Usuario>(
-                    (int) page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
+        new PageModel<Usuario>(
+            (int) page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
 
     return pm;
   }
@@ -67,8 +66,8 @@ public class UsuarioService {
     String password_hash = HashUtil.getSecureHash(password);
 
     Optional<Usuario> result = userRepository.login(email, password_hash);
-    if (result.isPresent()) System.out.println("Usuario Encontrado");
-    else System.out.println("Usuario Nao Encontrado");
+    if (result.isPresent()){ logger.info("Usuario Encontrado Com Sucesso!");}
+    else {logger.error("Usuario Nao Encontrado");}
     return result.get();
   }
 }
